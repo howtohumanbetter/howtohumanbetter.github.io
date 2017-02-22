@@ -29,11 +29,6 @@ module.exports = function (grunt) {
   var generateCommonJSModule = require('./grunt/bs-commonjs-generator.js');
   var configBridge = grunt.file.readJSON('./grunt/configBridge.json', { encoding: 'utf8' });
 
-  Object.keys(configBridge.paths).forEach(function (key) {
-    configBridge.paths[key].forEach(function (val, i, arr) {
-      arr[i] = path.join('./docs/assets', val);
-    });
-  });
 
   // Project configuration.
   grunt.initConfig({
@@ -51,7 +46,6 @@ module.exports = function (grunt) {
     // Task configuration.
     clean: {
       dist: '../dist',
-      docs: '../docs/dist'
     },
 
     jshint: {
@@ -73,9 +67,6 @@ module.exports = function (grunt) {
         },
         src: 'js/tests/unit/*.js'
       },
-      assets: {
-        src: ['docs/assets/js/src/*.js', 'docs/assets/js/*.js', '!docs/assets/js/*.min.js']
-      }
     },
 
     jscs: {
@@ -135,14 +126,6 @@ module.exports = function (grunt) {
         src: '<%= concat.bootstrap.dest %>',
         dest: '../dist/js/<%= pkg.name %>.min.js'
       },
-      customize: {
-        src: configBridge.paths.customizerJs,
-        dest: '../docs/assets/js/customize.min.js'
-      },
-      docsJs: {
-        src: configBridge.paths.docsJs,
-        dest: '../docs/assets/js/docs.min.js'
-      }
     },
 
     qunit: {
@@ -193,15 +176,6 @@ module.exports = function (grunt) {
         },
         src: '../dist/css/<%= pkg.name %>-theme.css'
       },
-      docs: {
-        src: ['docs/assets/css/src/docs.css']
-      },
-      examples: {
-        expand: true,
-        cwd: 'docs/examples/',
-        src: ['**/*.css'],
-        dest: 'docs/examples/'
-      }
     },
 
     csslint: {
@@ -212,16 +186,6 @@ module.exports = function (grunt) {
         '../dist/css/bootstrap.css',
         '../dist/css/bootstrap-theme.css'
       ],
-      examples: [
-        'docs/examples/**/*.css'
-      ],
-      docs: {
-        options: {
-          ids: false,
-          'overqualified-elements': false
-        },
-        src: 'docs/assets/css/src/docs.css'
-      }
     },
 
     cssmin: {
@@ -242,14 +206,6 @@ module.exports = function (grunt) {
         src: '../dist/css/<%= pkg.name %>-theme.css',
         dest: '../dist/css/<%= pkg.name %>-theme.min.css'
       },
-      docs: {
-        src: [
-          'docs/assets/css/ie10-viewport-bug-workaround.css',
-          'docs/assets/css/src/pygments-manni.css',
-          'docs/assets/css/src/docs.css'
-        ],
-        dest: 'docs/assets/css/docs.min.css'
-      }
     },
 
     csscomb: {
@@ -262,16 +218,6 @@ module.exports = function (grunt) {
         src: ['*.css', '!*.min.css'],
         dest: '../dist/css/'
       },
-      examples: {
-        expand: true,
-        cwd: 'docs/examples/',
-        src: '**/*.css',
-        dest: 'docs/examples/'
-      },
-      docs: {
-        src: 'docs/assets/css/src/docs.css',
-        dest: 'docs/assets/css/src/docs.css'
-      }
     },
 
     copy: {
@@ -280,14 +226,6 @@ module.exports = function (grunt) {
         src: 'fonts/**',
         dest: '../dist/'
       },
-      docs: {
-        expand: true,
-        cwd: '../dist/',
-        src: [
-          '**/*'
-        ],
-        dest: '../docs/dist/'
-      }
     },
 
     connect: {
@@ -305,7 +243,6 @@ module.exports = function (grunt) {
         config: '_config.yml',
         incremental: false
       },
-      docs: {},
       github: {
         options: {
           raw: 'github: true'
@@ -343,25 +280,10 @@ module.exports = function (grunt) {
         dest: '_gh_pages',
         src: [
           '**/*.html',
-          '!examples/**/*.html'
         ]
       }
     },
 
-    pug: {
-      options: {
-        pretty: true,
-        data: getLessVarsData
-      },
-      customizerVars: {
-        src: 'docs/_pug/customizer-variables.pug',
-        dest: 'docs/_includes/customizer-variables.html'
-      },
-      customizerNav: {
-        src: 'docs/_pug/customizer-nav.pug',
-        dest: 'docs/_includes/nav/customize.html'
-      }
-    },
 
     htmllint: {
       options: {
@@ -435,7 +357,7 @@ module.exports = function (grunt) {
   require('time-grunt')(grunt);
 
   // Docs HTML validation task
-  grunt.registerTask('validate-html', ['jekyll:docs', 'htmllint']);
+  grunt.registerTask('validate-html', ['htmllint']);
 
   var runSubset = function (subset) {
     return !process.env.TWBS_TEST || process.env.TWBS_TEST === subset;
@@ -450,7 +372,7 @@ module.exports = function (grunt) {
   if (runSubset('core') &&
       // Skip core tests if this is a Savage build
       process.env.TRAVIS_REPO_SLUG !== 'twbs-savage/bootstrap') {
-    testSubtasks = testSubtasks.concat(['dist-css', 'dist-js', 'csslint:dist', 'test-js', 'docs']);
+    testSubtasks = testSubtasks.concat(['dist-css', 'dist-js', 'csslint:dist', 'test-js']);
   }
   // Skip HTML validation if running a different subset of the test suite
   if (runSubset('validate-html') &&
@@ -499,13 +421,6 @@ module.exports = function (grunt) {
     generateCommonJSModule(grunt, srcFiles, destFilepath);
   });
 
-  // Docs task.
-  grunt.registerTask('docs-css', ['autoprefixer:docs', 'autoprefixer:examples', 'csscomb:docs', 'csscomb:examples', 'cssmin:docs']);
-  grunt.registerTask('lint-docs-css', ['csslint:docs', 'csslint:examples']);
-  grunt.registerTask('docs-js', ['uglify:docsJs', 'uglify:customize']);
-  grunt.registerTask('lint-docs-js', ['jshint:assets', 'jscs:assets']);
-  grunt.registerTask('docs', ['docs-css', 'lint-docs-css', 'docs-js', 'lint-docs-js', 'clean:docs', 'copy:docs', 'build-glyphicons-data', 'build-customizer']);
-  grunt.registerTask('docs-github', ['jekyll:github', 'htmlmin']);
 
-  grunt.registerTask('prep-release', ['dist', 'docs', 'docs-github', 'compress']);
+  grunt.registerTask('prep-release', ['dist', 'compress']);
 };
