@@ -6,6 +6,12 @@ body {
   padding-bottom: 20px;
 }
 
+#homepage-hero {
+  background-image: url(../img/homepage-hero.jpg);
+  background-position: center;
+  background-size: cover;
+}
+
 blockquote {
   border-left: none;
   font-size: inherit;
