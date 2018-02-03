@@ -12,14 +12,13 @@
 @gray-dark:              lighten(@gray-base, 20%);   // #333
 @gray:                   lighten(@gray-base, 33.5%); // #555
 @gray-light:             lighten(@gray-base, 46.7%); // #777
-@gray-lighter:           lighten(@gray-base, 93.5%); // #eee
+@gray-lighter:           lighten(@gray-base, 86.6%); // #ddd
 
-/* Light red color: #FBEBEA */
-/* Red font color: #e15b55 */
-/* Purple font color: #6b3a98 */
+/* Light blue color: #999ed1 */
+/* Purple font color: #6f209f */
 
 
-@brand-primary:         #6b3a98;
+@brand-primary:         #6f209f;
 @brand-success:         #5cb85c;
 @brand-info:            #5bc0de;
 @brand-warning:         #f0ad4e;
@@ -47,11 +46,11 @@
 //
 //## Font, line-height, and color for body text, headings, and more.
 
-@font-family-sans-serif:  'Josefin Sans', sans-serif;
-@font-family-serif:       Georgia, "Times New Roman", Times, serif;
+@font-family-sans-serif:  'Century Gothic', CenturyGothic, Muli, sans-serif;
+@font-family-serif:       'EB Garamond', serif;
 //** Default monospace fonts for `<code>`, `<kbd>`, and `<pre>`.
 @font-family-monospace:   Menlo, Monaco, Consolas, "Courier New", monospace;
-@font-family-base:        @font-family-sans-serif;
+@font-family-base:        @font-family-serif;
 
 @font-size-base:          16px;
 @font-size-large:         ceil((@font-size-base * 1.25)); // ~18px
@@ -70,10 +69,10 @@
 @line-height-computed:    floor((@font-size-base * @line-height-base)); // ~20px
 
 //** By default, this inherits from the `<body>`.
-@headings-font-family:    inherit;
+@headings-font-family:    @font-family-sans-serif;
 @headings-font-weight:    500;
 @headings-line-height:    1.1;
-@headings-color:          #e15b55;
+@headings-color:          #6f209f;
 
 
 //== Iconography
@@ -395,12 +394,12 @@
 
 //=== Inverted navbar
 // Reset inverted navbar basics
-@navbar-inverse-color:                      lighten(@gray-light, 15%);
-@navbar-inverse-bg:                         #fbebea;
+@navbar-inverse-color:                      @gray-lighter;
+@navbar-inverse-bg:                         #999ed1;
 @navbar-inverse-border:                     darken(@navbar-inverse-bg, 10%);
 
 // Inverted navbar links
-@navbar-inverse-link-color:                 lighten(@gray-light, 15%);
+@navbar-inverse-link-color:                 @gray-lighter;
 @navbar-inverse-link-hover-color:           #6b3a98;
 @navbar-inverse-link-hover-bg:              transparent;
 @navbar-inverse-link-active-color:          @navbar-inverse-link-hover-color;
@@ -409,8 +408,8 @@
 @navbar-inverse-link-disabled-bg:           transparent;
 
 // Inverted navbar brand label
-@navbar-inverse-brand-color:                #e15b55;
-@navbar-inverse-brand-hover-color:          #e15b55;
+@navbar-inverse-brand-color:                #6f209f;
+@navbar-inverse-brand-hover-color:          #6f209f;
 @navbar-inverse-brand-hover-bg:             transparent;
 
 // Inverted navbar toggle
