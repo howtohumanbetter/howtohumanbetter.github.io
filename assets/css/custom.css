@@ -55,3 +55,15 @@ blockquote {
 #philosophy-quotable-img-2 {
   background-image: url(../img/quotable-philosophy-2.jpg);
 }
+
+.equal{
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+}
+
+.panel {
+    width: 100%;
+    height: 100%;
+}
+
