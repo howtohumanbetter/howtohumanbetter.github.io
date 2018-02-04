@@ -56,10 +56,12 @@ blockquote {
   background-image: url(../img/quotable-philosophy-2.jpg);
 }
 
-.equal{
+@media (min-width: 992px) {
+  .equal {
     display: -ms-flexbox;
     display: -webkit-flex;
     display: flex;
+  }
 }
 
 .panel {
