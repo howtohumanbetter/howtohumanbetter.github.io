@@ -1389,11 +1389,11 @@ a.bg-success:focus {
   background-color: #c1e2b3;
 }
 .bg-info {
-  background-color: #d9edf7;
+  background-color: #ccc;
 }
 a.bg-info:hover,
 a.bg-info:focus {
-  background-color: #afd9ee;
+  background-color: #b3b3b3;
 }
 .bg-warning {
   background-color: #fcf8e3;
@@ -2390,14 +2390,14 @@ table th[class*="col-"] {
 .table > thead > tr.info > th,
 .table > tbody > tr.info > th,
 .table > tfoot > tr.info > th {
-  background-color: #d9edf7;
+  background-color: #ccc;
 }
 .table-hover > tbody > tr > td.info:hover,
 .table-hover > tbody > tr > th.info:hover,
 .table-hover > tbody > tr.info:hover > td,
 .table-hover > tbody > tr:hover > .info,
 .table-hover > tbody > tr.info:hover > th {
-  background-color: #c4e3f3;
+  background-color: #bfbfbf;
 }
 .table > thead > tr > td.warning,
 .table > tbody > tr > td.warning,
@@ -5073,11 +5073,11 @@ a.thumbnail.active {
 }
 .alert-info {
   color: #31708f;
-  background-color: #d9edf7;
-  border-color: #bce8f1;
+  background-color: #ccc;
+  border-color: #bababa;
 }
 .alert-info hr {
-  border-top-color: #a6e1ec;
+  border-top-color: #adadad;
 }
 .alert-info .alert-link {
   color: #245269;
@@ -5359,7 +5359,7 @@ button.list-group-item-success.active:focus {
 }
 .list-group-item-info {
   color: #31708f;
-  background-color: #d9edf7;
+  background-color: #ccc;
 }
 a.list-group-item-info,
 button.list-group-item-info {
@@ -5374,7 +5374,7 @@ button.list-group-item-info:hover,
 a.list-group-item-info:focus,
 button.list-group-item-info:focus {
   color: #31708f;
-  background-color: #c4e3f3;
+  background-color: #bfbfbf;
 }
 a.list-group-item-info.active,
 button.list-group-item-info.active,
@@ -5742,22 +5742,22 @@ button.list-group-item-danger.active:focus {
   border-bottom-color: #d6e9c6;
 }
 .panel-info {
-  border-color: #bce8f1;
+  border-color: #bababa;
 }
 .panel-info > .panel-heading {
   color: #31708f;
-  background-color: #d9edf7;
-  border-color: #bce8f1;
+  background-color: #ccc;
+  border-color: #bababa;
 }
 .panel-info > .panel-heading + .panel-collapse > .panel-body {
-  border-top-color: #bce8f1;
+  border-top-color: #bababa;
 }
 .panel-info > .panel-heading .badge {
-  color: #d9edf7;
+  color: #ccc;
   background-color: #31708f;
 }
 .panel-info > .panel-footer + .panel-collapse > .panel-body {
-  border-bottom-color: #bce8f1;
+  border-bottom-color: #bababa;
 }
 .panel-warning {
   border-color: #faebcc;
